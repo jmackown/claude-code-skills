@@ -84,12 +84,6 @@ Pick the agent by task:
 - The OpenAI Codex CLI (`codex`) for `adversarial-reviewer`. If `codex` is missing, the agent returns the error and does not attempt a review itself.
 - `uv` and `ruff` for `pre-flight`, which runs `uv run ruff` and `uv run pytest`.
 
-## Credits and related
-
-The post mentions two third-party plugins that compress Claude's output. They are separate projects and are not included here:
-
-- [caveman](https://github.com/JuliusBrussee/caveman)
-- [ponytail](https://github.com/DietrichGebert/ponytail)
 
 ## Licence
 
