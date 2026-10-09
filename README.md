@@ -14,6 +14,7 @@ Everything here is plain Markdown, JSON, and one shell script. Copy what you wan
 | `sonnet-worker` | Agent (Sonnet) | Implements well-scoped tasks with a clear spec, such as tests, small features, and boilerplate. |
 | `code-locator` | Agent (Sonnet) | Read-only sweep that returns a file:line map of where things live. It never edits or proposes fixes. |
 | `test-runner` | Agent (Sonnet) | Runs tests, lint, typecheck, or build commands and reports pass or fail with a triaged failure summary. It does not fix anything. |
+| `basic-tasks` | Agent (Sonnet) | Handles bounded, well-specified mechanical work such as file lookups, single-file edits, test runs, and focused research. It stops and says so if the task needs cross-file judgement. |
 | `CLAUDE.snippets.md` | Config snippet | Two sections for your global `CLAUDE.md`: delegate grind work to subagents, and keep tool output out of the context window. |
 | `settings.example.json` | Config example | Example `settings.json` entries: prompt caching environment variables, a default subagent model, and the status line command. |
 | `statusline/context-bar.sh` | Script | Status line showing model, directory, git branch, a context bar, estimated session cost, and per-turn cache hit rate. |
@@ -27,6 +28,7 @@ Everything here is plain Markdown, JSON, and one shell script. Copy what you wan
 | `adversarial-reviewer` | Agent (Haiku) | Wraps the OpenAI `codex review` CLI to get an independent critique of a diff, branch, or commit, then summarises it. |
 | `senior-dev-reviewer` | Agent (Sonnet) | Reviews code for production readiness, scalability, security, and maintainability. |
 | `codebase-overview` | Skill | Inspects a repo and writes a grounded `CODEBASE_OVERVIEW.md` for humans and future agents. |
+| `claudit` | Skill | Runs a read-only audit of your machine and Claude Code setup (tools, MCP servers, hooks, permissions, skills, `CLAUDE.md`, memory), ranks what to fix, and compares each run with the last one. |
 
 The cost and cache figures in `context-bar.sh` are estimates and exclude subagent usage.
 
@@ -68,6 +70,7 @@ Pick the agent by task:
 - `test-runner` to run a verification command and read the output.
 - `haiku-worker` for mechanical single-file edits.
 - `sonnet-worker` for well-scoped implementation.
+- `basic-tasks` for bounded lookups, single-file edits, test runs, and focused research.
 
 ### Standalone skills and commands
 
@@ -76,6 +79,7 @@ Pick the agent by task:
 - `adversarial-reviewer`: ask for a review with an explicit scope, such as "review the unstaged changes" or "review main...HEAD".
 - `senior-dev-reviewer`: ask for a review after a significant change.
 - `codebase-overview`: ask Claude to create or update the repo's codebase overview.
+- `claudit`: run `/claudit` or say "audit my setup". The first run asks where to save reports. Later runs compare against the previous report, so rerun it every few weeks to catch drift.
 
 ## Requirements
 
@@ -84,6 +88,9 @@ Pick the agent by task:
 - The OpenAI Codex CLI (`codex`) for `adversarial-reviewer`. If `codex` is missing, the agent returns the error and does not attempt a review itself.
 - `uv` and `ruff` for `pre-flight`, which runs `uv run ruff` and `uv run pytest`.
 
+## Credits
+
+`claudit` was inspired by [Claude Code told me what tools it needs to work faster](https://sderosiaux.substack.com/p/claude-code-told-me-what-tools-it) by Stéphane Derosiaux.
 
 ## Licence
 
