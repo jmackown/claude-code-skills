@@ -17,6 +17,9 @@ test runs, CI log triage. Batch independent subagents in one message.
 Do it yourself: trivial in-context edits, a single targeted read, anything I
 tell you to just do.
 
+* Subagents edit files and run tests. The main session does the commit, push and draft PR. Background agents can't surface permission prompts, so they stall at those steps.
+* Check on background agents every 5 minutes with a progress monitor (file changes in their worktree). If one shows no progress for 5 minutes, stop it, tell me why, and take over. Never go quiet for long; give a one-line status.
+
 Rationale: Opus output and its ever-growing context are the expensive part.
 Cheap models do the grind.
 

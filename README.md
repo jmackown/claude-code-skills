@@ -29,6 +29,8 @@ Everything here is plain Markdown, JSON, and one shell script. Copy what you wan
 | `senior-dev-reviewer` | Agent (Sonnet) | Reviews code for production readiness, scalability, security, and maintainability. |
 | `codebase-overview` | Skill | Inspects a repo and writes a grounded `CODEBASE_OVERVIEW.md` for humans and future agents. |
 | `claudit` | Skill | Runs a read-only audit of your machine and Claude Code setup (tools, MCP servers, hooks, permissions, skills, `CLAUDE.md`, memory), ranks what to fix, and compares each run with the last one. |
+| `vuln-scan` | Skill | Scans a uv project's Python dependencies (pip-audit) and Docker image (Trivy), cross-checks open Dependabot alerts, and reports which findings are actually reachable. |
+| `worktree-tidy` | Skill | Lists a repo's git worktrees with their PR state and removes the ones whose work is already saved in a PR or on a remote branch. |
 
 The cost and cache figures in `context-bar.sh` are estimates and exclude subagent usage.
 
